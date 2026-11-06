@@ -1,5 +1,6 @@
 var builder = WebApplication.CreateBuilder(args);
 var app = builder.Build();
+var submissions = new List<SubmissionResult>();
 
 var assignments = new[]
 {
@@ -37,10 +38,22 @@ app.MapPost("/api/submissions",
         DateTimeOffset.UtcNow
     );
 
+    submissions.Add(submission);
     return Results.Created(
         $"/api/submissions/{submission.Id}",
         submission
     );
+});
+app.MapGet("/api/submissions/{id:guid}", IResult (Guid id) =>
+{
+    var submission = submissions.FirstOrDefault(s => s.Id == id);
+
+    if (submission is null)
+    {
+        return Results.NotFound();
+    }
+
+    return Results.Ok(submission);
 });
 
 app.Run();

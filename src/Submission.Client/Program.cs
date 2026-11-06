@@ -39,6 +39,14 @@ if (submission is not null)
 {
     Console.WriteLine($"Da nop bai. Ma luot nop: {submission.Id}");
     Console.WriteLine($"Trang thai: {submission.Status}");
+    var savedSubmission = await client
+    .GetFromJsonAsync<SubmissionResult>(
+        $"/api/submissions/{submission.Id}"
+    );
+
+Console.WriteLine($"Doc lai luot nop: {savedSubmission?.Id}");
+Console.WriteLine($"Ma sinh vien: {savedSubmission?.StudentCode}");
+Console.WriteLine($"Trang thai doc lai: {savedSubmission?.Status}");
 }
 
 record Assignment(int Id, string Title, string Description);

@@ -1,4 +1,4 @@
-@api = http://localhost:5000
+      @api = http://localhost:5000
 
 ### Kiem tra API - 200
 GET {{api}}/
@@ -25,3 +25,8 @@ Content-Type: application/json
   "studentCode": "",
   "repositoryUrl": ""
 }
+### 5. Doc luot nop co that - 200
+GET {{api}}/api/submissions/b72d581e-150d-4799-920f-38a9b1ef165e
+
+### 6. Doc luot nop khong ton tai - 404
+GET {{api}}/api/submissions/00000000-0000-0000-0000-000000000000
